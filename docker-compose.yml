@@ -1,0 +1,57 @@
+services:
+  express-server:
+    build: .
+    container_name: express_app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"    
+    # depends_on:
+    #   - postgres
+    env_file:
+      - .env
+
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: postgres_db
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: root
+  #     POSTGRES_PASSWORD: pass@123
+  #     POSTGRES_DB: testbase
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+
+  # redis:
+  #   image: redis:alpine
+  #   container_name: redis_cache
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+
+  # kafka:
+  #   image: bitnami/kafka:latest
+  #   container_name: kafka_broker
+  #   restart: unless-stopped
+  #   ports:
+  #     - "9092:9092"
+  #   environment:
+  #     KAFKA_BROKER_ID: 1
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  #     KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+
+  # zookeeper:
+  #   image: bitnami/zookeeper:latest
+  #   container_name: zookeeper
+  #   restart: unless-stopped
+  #   environment:
+  #     - ALLOW_ANONYMOUS_LOGIN=yes
+  #   ports:
+  #     - "2181:2181"
+
+volumes:
+  pgdata:
+
